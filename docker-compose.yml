@@ -1,0 +1,48 @@
+version: '3.7'
+services:
+  config-server-container:
+    image: config-server:v1
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      - springcloud-bank
+    links:
+      - service-eureka-container
+  service-eureka-container:
+    image: eureka-server:v1
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - springcloud-bank
+  service-apigateway-container:
+    image: apigateway-server:v1
+    ports:
+      - "8090:8090"
+    restart: always
+    networks:
+      - springcloud-bank
+  service-transaction-person-container:
+    image: service-transaction-person:v1
+    ports:
+      - "8026:8026"
+    restart: always
+    networks:
+      - springcloud-bank
+  service-product-savingaccount-container:
+    image: service-product-savingaccount:v1
+    ports:
+      - "8024:8024"
+    restart: always
+    networks:
+      - springcloud-bank
+  service-product-personalcredit-container:
+    image: service-product-personalcredit:v1
+    ports:
+      - "8023:8023"
+    restart: always
+    networks:
+      - springcloud-bank
+networks:
+  springcloud-bank:
